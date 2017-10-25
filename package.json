@@ -1,11 +1,19 @@
 {
   "name": "gw2-coin",
   "version": "1.0.0",
-  "description": "",
+  "description": "convert number to game unit currency (default: gw2)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/gw2-coin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bluelovers/gw2-coin/issues"
+  },
+  "homepage": "https://github.com/bluelovers/gw2-coin#readme"
 }
