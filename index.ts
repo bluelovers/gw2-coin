@@ -66,6 +66,11 @@ export class Coin
 		return new CoinObject(a.map(i => parseInt(i)), options);
 	}
 
+	static init(options: ICoinOptions = {})
+	{
+		return (new this(options)).toCoinObject;
+	}
+
 	static padStr(n, len)
 	{
 		n = n.toString();
@@ -79,12 +84,17 @@ export class Coin
 	}
 }
 
+export interface ICoinObjectOptions extends ICoinOptions
+{
+	toStringNumber?: boolean;
+}
+
 export class CoinObject
 {
-	public options: ICoinOptions;
+	public options: ICoinObjectOptions;
 	private data: vCoin[];
 
-	constructor(data, options: ICoinOptions = {})
+	constructor(data, options: ICoinObjectOptions = {})
 	{
 		this.data = data;
 		this.options = options;
@@ -107,7 +117,7 @@ export class CoinObject
 		return this.toObject(pad);
 	}
 
-	toNumber()
+	toNumber(): number
 	{
 		let self = this;
 
@@ -120,6 +130,16 @@ export class CoinObject
 	}
 
 	toString(pad: vBool = false)
+	{
+		if (this.options.toStringNumber == true)
+		{
+			return this.toNumber();
+		}
+
+		return this.toStringUnit(pad);
+	}
+
+	toStringUnit(pad: vBool = false): string
 	{
 		let c = [];
 
@@ -146,6 +166,11 @@ export class CoinObject
 	{
 		return this.data.slice();
 	}
+}
+
+export function init(options: ICoinOptions = {}, objclass = Coin)
+{
+	return objclass.init(options);
 }
 
 export default exports;
