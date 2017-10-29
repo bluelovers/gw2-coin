@@ -14,16 +14,22 @@ export declare class Coin {
     constructor(options?: ICoinOptions);
     private _options(options?);
     toCoinObject(num: vCoin, options?: ICoinOptions): CoinObject;
+    static init(options?: ICoinOptions): (num: vCoin, options?: ICoinOptions) => CoinObject;
     static padStr(n: any, len: any): any;
 }
+export interface ICoinObjectOptions extends ICoinOptions {
+    toStringNumber?: boolean;
+}
 export declare class CoinObject {
-    options: ICoinOptions;
+    options: ICoinObjectOptions;
     private data;
-    constructor(data: any, options?: ICoinOptions);
+    constructor(data: any, options?: ICoinObjectOptions);
     toObject(pad?: vBool): {};
     toJSON(pad?: vBool): {};
     toNumber(): number;
-    toString(pad?: vBool): string;
+    toString(pad?: vBool): vCoin;
+    toStringUnit(pad?: vBool): string;
     toArray(): vCoin[];
 }
+export declare function init(options?: ICoinOptions, objclass?: typeof Coin): (num: vCoin, options?: ICoinOptions) => CoinObject;
 export default exports;
